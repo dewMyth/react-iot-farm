@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Button } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
 import { useHistory } from "react-router";
+
+import DashboardNavbar from './DashboardNavbar'
 
 const Dashboard = () => {
 
@@ -21,7 +22,7 @@ const Dashboard = () => {
 
     return (
         <div>
-            <Button variant="link" onClick={handleLogout}>Logout</Button>
+            <DashboardNavbar handleLogout={handleLogout} />
         </div>
     )
 }

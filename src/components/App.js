@@ -13,22 +13,22 @@ const App = () => {
   return (
     <React.Fragment>
      
-      <Container className="d-flex align-items-center justify-content-center" style={{minHeight : "100vh"}}>
+      
         <Router>
           <AuthProvider>
             <Switch>
               <Route exact path="/" component={Dashboard} />
+              <Container className="d-flex align-items-center justify-content-center" style={{minHeight : "100vh"}}>
               <div className="w-200" style={{maxWidth:"400px"}}>
                 <Route path="/signup" exact component={SignUp} />
                 <Route path="/login" exact component={Login} />
               </div>
+              </Container>
             </Switch>
             
 
           </AuthProvider>
         </Router>
-      </Container>
-     
 
     </React.Fragment>
   );

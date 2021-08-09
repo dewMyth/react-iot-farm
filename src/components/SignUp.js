@@ -9,6 +9,7 @@ import { useHistory } from "react-router";
 const SignUp = () => {
 
   const emailRef = useRef()
+  const deviceIdRef = useRef()
   const passwordRef = useRef()
   const confirmPasswordRef = useRef()
   const {signup} = useAuth()
@@ -24,7 +25,7 @@ const SignUp = () => {
     try {
       setError('');
       setLoading(true);
-      signup(emailRef.current.value, passwordRef.current.value);
+      signup(emailRef.current.value, passwordRef.current.value, deviceIdRef.current.value);
       history.push("/login")
     }
     catch {
@@ -44,6 +45,10 @@ const SignUp = () => {
             <Form.Group className="mt-4" id="email">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef}></Form.Control>
+            </Form.Group>
+            <Form.Group className="mt-4" id="deviceId">
+              <Form.Label>Device ID</Form.Label>
+              <Form.Control type="text" placeholder="Ex : 1001" ref={deviceIdRef}></Form.Control>
             </Form.Group>
             <Form.Group className="mt-4" id="password">
               <Form.Label>Password</Form.Label>
