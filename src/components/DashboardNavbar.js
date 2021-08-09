@@ -25,7 +25,7 @@ const DashboardNavbar = (props) => {
                 <Nav.Link href="#pricing">Pricing</Nav.Link>
                 </Nav>
                 <Nav>
-                <Nav.Link href="#deets">More deets</Nav.Link>
+                <Nav.Link href="#deets">{props.currentUser ? props.currentUser.email : "No User/Device"}</Nav.Link>
                 <Nav.Link onClick={props.handleLogout}>
                     Logout
                 </Nav.Link>

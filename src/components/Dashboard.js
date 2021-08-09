@@ -1,19 +1,19 @@
 import React, { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 
 import DashboardNavbar from './DashboardNavbar'
 
 const Dashboard = () => {
 
     const [error, setError] = useState("")
-    const {logout} = useAuth();
+    const {logout, currentUser} = useAuth();
     const history = useHistory()
 
-    const handleLogout = () => {
+    async function handleLogout(){ 
         setError('');
         try{
-            logout();
+            await logout();
             history.push('/login')
         }catch{
             setError('cannot logout')
@@ -22,7 +22,7 @@ const Dashboard = () => {
 
     return (
         <div>
-            <DashboardNavbar handleLogout={handleLogout} error={error} />
+            <DashboardNavbar handleLogout={handleLogout} error={error} currentUser={currentUser}/>
         </div>
     )
 }
