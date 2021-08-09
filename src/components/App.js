@@ -1,8 +1,12 @@
+//React Imports
 import React from "react";
-import {Container} from 'react-bootstrap'
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import { AuthProvider } from "../contexts/AuthContext";
 
+//Bootstrap Imports
+import {Container} from 'react-bootstrap'
+
+//React Components
 import  Dashboard from './Dashboard';
 import SignUp from "./SignUp";
 import Login from "./Login";
@@ -12,8 +16,6 @@ import Login from "./Login";
 const App = () => {
   return (
     <React.Fragment>
-     
-      
         <Router>
           <AuthProvider>
             <Switch>
@@ -25,8 +27,6 @@ const App = () => {
               </div>
               </Container>
             </Switch>
-            
-
           </AuthProvider>
         </Router>
 

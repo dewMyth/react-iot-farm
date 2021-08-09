@@ -1,10 +1,11 @@
+//React Imports
 import React, {useRef, useState} from "react";
-
-import { Form, Button, Card, Alert } from "react-bootstrap";
-
 import {useAuth} from '../contexts/AuthContext'; 
-
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
+
+//Bootstrap Imports
+import { Form, Button, Card, Alert } from "react-bootstrap";
 
 const SignUp = () => {
 
@@ -17,7 +18,7 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const history = useHistory()
 
-  const handleSubmit = (e) => {
+  async function handleSignup(e){
     e.preventDefault();
     if(passwordRef.current.value !== confirmPasswordRef.current.value){
       return setError("Passwords should be match!!!")
@@ -41,7 +42,7 @@ const SignUp = () => {
         <Card.Body>
           <h2 className="text-center mb-4">Sign Up</h2>
           {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSignup}>
             <Form.Group className="mt-4" id="email">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef}></Form.Control>
@@ -63,7 +64,7 @@ const SignUp = () => {
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-4" >
-        Already have an account? Log In
+        Already have an account?  <Link to="/login"> Log In</Link>
       </div> 
     </div>
   );

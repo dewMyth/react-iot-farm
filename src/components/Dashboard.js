@@ -7,7 +7,7 @@ import DashboardNavbar from './DashboardNavbar'
 const Dashboard = () => {
 
     const [error, setError] = useState("")
-    const {currentUser, logout} = useAuth();
+    const {logout} = useAuth();
     const history = useHistory()
 
     const handleLogout = () => {
@@ -22,7 +22,7 @@ const Dashboard = () => {
 
     return (
         <div>
-            <DashboardNavbar handleLogout={handleLogout} />
+            <DashboardNavbar handleLogout={handleLogout} error={error} />
         </div>
     )
 }
