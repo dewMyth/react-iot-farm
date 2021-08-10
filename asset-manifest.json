@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/react-iot-farm/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/react-iot-farm/static/js/main.ad89d875.chunk.js",
+    "main.js.map": "/react-iot-farm/static/js/main.ad89d875.chunk.js.map",
+    "runtime-main.js": "/react-iot-farm/static/js/runtime-main.c27c6906.js",
+    "runtime-main.js.map": "/react-iot-farm/static/js/runtime-main.c27c6906.js.map",
+    "static/js/2.2352b467.chunk.js": "/react-iot-farm/static/js/2.2352b467.chunk.js",
+    "static/js/2.2352b467.chunk.js.map": "/react-iot-farm/static/js/2.2352b467.chunk.js.map",
+    "index.html": "/react-iot-farm/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/react-iot-farm/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.2352b467.chunk.js.LICENSE.txt": "/react-iot-farm/static/js/2.2352b467.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c27c6906.js",
+    "static/js/2.2352b467.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.ad89d875.chunk.js"
+  ]
+}
