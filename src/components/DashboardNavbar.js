@@ -1,18 +1,9 @@
 
-import React, {useEffect} from 'react'
+import React from 'react'
 
-import { Navbar, Container, Nav } from 'react-bootstrap'
-import { db } from '../firebase.config'
- 
+import { Navbar, Container, Nav } from 'react-bootstrap' 
 
 const DashboardNavbar = (props) => {
-
-    useEffect(() => {
-        db.child('FirebaseIOT').on('value', snapshot => {
-            console.log(snapshot.val())
-        })
-     }, [])
-
     return (
         <React.Fragment>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">

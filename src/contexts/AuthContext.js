@@ -18,10 +18,10 @@ export const AuthProvider = ({children}) => {
         return auth.createUserWithEmailAndPassword(email, password)
         .then(registeredUser => {
             fs.collection("users")
-            .add({
-            uid: registeredUser.user.uid,
-            email:email,
-            deviceId : deviceId
+            .doc(registeredUser.user.uid)
+            .set({
+                email:email,
+                deviceId : deviceId
             })
         })
     }
