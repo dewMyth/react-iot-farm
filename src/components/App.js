@@ -11,6 +11,7 @@ import  Dashboard from './Dashboard';
 import SignUp from "./SignUp";
 import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
+import ForgotPassword from "./ForgotPassword";
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
               <div className="w-200" style={{maxWidth:"400px"}}>
                 <Route path="/signup" exact component={SignUp} />
                 <Route path="/login" exact component={Login} />
+                <Route path="/forgot-password" exact component={ForgotPassword} />
               </div>
               </Container>
             </Switch>
