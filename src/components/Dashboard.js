@@ -10,6 +10,8 @@ import { Container, Row, Col } from 'react-bootstrap'
 import DashboardNavbar from './DashboardNavbar'
 import LiveDataCard from './LiveDataCard';
 
+import "../css/style.css"
+
 const Dashboard = () => {
 
     const [error, setError] = useState("")
@@ -77,12 +79,15 @@ const Dashboard = () => {
                   <Col sm>                    
                     <LiveDataCard color={humidity_color} text={humidity_text} icon={humidity_icon} value={liveData.humidity}/>
                   </Col>
+                  <div className="mobile-space"><br/></div>
                   <Col sm>                                        
                     <LiveDataCard color={moisture_color} text={moisture_text} icon={moisture_icon} value={liveData.moisture}/>
                   </Col>
+                  <div className="mobile-space"><br/></div>
                   <Col sm>
                     <LiveDataCard color={voltage_color} text={voltage_text} icon={voltage_icon} value={liveData.voltage}/>
                   </Col>
+                  <div className="mobile-space"><br/></div>
                   <Col sm>
                     <LiveDataCard color={solar_status_color} text={solar_status_text} icon={solar_status_icon} value={liveData.solar_status}/>
                   </Col>          

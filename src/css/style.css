@@ -1,0 +1,9 @@
+.mobile-space{
+    display: unset;
+}
+
+@media (min-width: 1024px) { 
+    .mobile-space{
+        display: none;
+    }
+}
