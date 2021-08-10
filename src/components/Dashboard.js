@@ -46,7 +46,7 @@ const Dashboard = () => {
     return (
         <React.Fragment>
             <DashboardNavbar handleLogout={handleLogout} error={error} currentUser={currentUser}/>
-            <Container className="d-flex align-items-center justify-content-center" style={{minHeight : "100vh"}}>
+            <Container className="d-flex align-items-center justify-content-center" style={{minHeight : "90vh"}}>
               <div className="w-200" style={{maxWidth:"400px"}}>
                 <h1>
                     My Device = {deviceId}
