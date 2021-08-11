@@ -49,7 +49,7 @@ const VoltageLineChart = (props) => {
         </div>
         {/* <!-- Card Body --> */}
         <div class="card-body">
-          <div class="chart-area" style={{ width: "99%", height: "99%" }}>
+          <div class="chart-area" style={{ width: "100%", height: 300 }}>
             <ResponsiveContainer>
               <LineChart
                 width={500}
