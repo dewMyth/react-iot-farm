@@ -120,7 +120,7 @@ const Profile = () => {
         await db
           .ref("FirebaseIOT/Live_data/" + deviceId)
           .on("value", function (snapshot) {
-            console.log(snapshot.val());
+            setLiveData(snapshot.val());
           });
         setLoading(true);
       } catch (e) {
