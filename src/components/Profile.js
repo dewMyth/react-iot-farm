@@ -4,8 +4,11 @@ import { useHistory, useParams } from "react-router-dom";
 
 import DashboardNavbar from "./DashboardNavbar";
 import LiveDataCard from "./LiveDataCard";
+import LiveDataVoltage from "./LiveDataVoltage";
 
 import { Container, Row, Col, Spinner } from "react-bootstrap";
+
+import Switch from "@mui/material/Switch";
 
 import { db, fs } from "../firebase.config";
 
@@ -62,15 +65,24 @@ const voltage_icon = "fas fa-bolt";
 const Profile = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  //   const [deviceId, setDeviceId] = useState("");
+  const [checked, setChecked] = useState(0);
   const [liveData, setLiveData] = useState({});
   const [records, setRecords] = useState([]);
 
   console.log(useParams());
-  //   let deviceId = useParams();
 
   const { logout, currentUser } = useAuth();
   const history = useHistory();
+
+  const switchHandler = (event) => {
+    if (event.target.checked) {
+      setChecked(1);
+    } else {
+      setChecked(0);
+    }
+  };
+
+  console.log(checked);
 
   async function handleLogout() {
     setError("");
@@ -87,10 +99,28 @@ const Profile = () => {
   useEffect(() => {
     (async () => {
       try {
+        if (liveData.moisture <= 30) {
+          db.ref("FirebaseIOT/Live_data/" + deviceId).update({
+            motor_status: 1,
+          });
+        } else {
+          db.ref("FirebaseIOT/Live_data/" + deviceId).update({
+            motor_status: 0,
+          });
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
         await db
           .ref("FirebaseIOT/Live_data/" + deviceId)
           .on("value", function (snapshot) {
-            setLiveData(snapshot.val());
+            console.log(snapshot.val());
           });
         setLoading(true);
       } catch (e) {
@@ -98,6 +128,8 @@ const Profile = () => {
       }
     })();
   }, []);
+
+  const label = { inputProps: { "aria-label": "Switch demo" } };
 
   return (
     <React.Fragment>
@@ -190,6 +222,17 @@ const Profile = () => {
           <Row>
             <Col sm>
               <LiveDataCard
+                color={motor_status_color}
+                text={motor_status_text}
+                icon={motor_status_icon}
+                value={liveData.motor_status ? "On" : "Off"}
+                loading={loading}
+              />
+              Turn ON/OFF the Motor
+              {/* <Switch checked={checked} onChange={switchHandler} /> */}
+            </Col>
+            <Col sm>
+              <LiveDataCard
                 color={fertilizer_status_color}
                 text={fertilizer_status_text}
                 icon={fertilizer_status_icon}
@@ -199,6 +242,23 @@ const Profile = () => {
             </Col>
 
             <Col sm>
+              <LiveDataVoltage
+                color={voltage_color}
+                text={voltage_text}
+                icon={voltage_icon}
+                value={liveData.voltage}
+                loading={loading}
+              />
+              {/* <LiveDataCard
+                color={voltage_color}
+                text={voltage_text}
+                icon={voltage_icon}
+                value={liveData.voltage}
+                loading={loading}
+              /> */}
+            </Col>
+
+            {/* <Col sm>
               <LiveDataCard
                 color={fertilizer_delay_color}
                 text={fertilizer_delay_text}
@@ -206,22 +266,12 @@ const Profile = () => {
                 value={`${liveData.fertilizer_delay / 1000} seconds`}
                 loading={loading}
               />
-            </Col>
+            </Col> */}
           </Row>
 
           <br />
           <Row>
-            <Col sm>
-              <LiveDataCard
-                color={motor_status_color}
-                text={motor_status_text}
-                icon={motor_status_icon}
-                value={liveData.motor_status ? "On" : "Off"}
-                loading={loading}
-              />
-            </Col>
-
-            <Col sm>
+            {/* <Col sm>
               <LiveDataCard
                 color={motor_delay_color}
                 text={motor_delay_text}
@@ -229,16 +279,7 @@ const Profile = () => {
                 value={`${liveData.motor_delay / 1000} seconds`}
                 loading={loading}
               />
-            </Col>
-            <Col sm>
-              <LiveDataCard
-                color={voltage_color}
-                text={voltage_text}
-                icon={voltage_icon}
-                value={liveData.voltage}
-                loading={loading}
-              />
-            </Col>
+            </Col> */}
           </Row>
         </Container>
 
