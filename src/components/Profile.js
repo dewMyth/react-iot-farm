@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory, useParams } from "react-router-dom";
 
@@ -99,24 +99,6 @@ const Profile = () => {
   useEffect(() => {
     (async () => {
       try {
-        if (liveData.moisture <= 30) {
-          db.ref("FirebaseIOT/Live_data/" + deviceId).update({
-            motor_status: 1,
-          });
-        } else {
-          db.ref("FirebaseIOT/Live_data/" + deviceId).update({
-            motor_status: 0,
-          });
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    })();
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      try {
         await db
           .ref("FirebaseIOT/Live_data/" + deviceId)
           .on("value", function (snapshot) {
@@ -128,6 +110,29 @@ const Profile = () => {
       }
     })();
   }, []);
+
+  //function to set motor status
+  async function changeMotorStatus() {
+    try {
+      if (liveData && liveData.moisture <= 30) {
+        await db.ref("FirebaseIOT/Live_data/" + deviceId).update({
+          motor_status: 1,
+        });
+      }
+      if (liveData && liveData.moisture > 30) {
+        await db.ref("FirebaseIOT/Live_data/" + deviceId).update({
+          motor_status: 0,
+        });
+      } else {
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    changeMotorStatus();
+  }, [changeMotorStatus]);
 
   const label = { inputProps: { "aria-label": "Switch demo" } };
 
@@ -225,11 +230,9 @@ const Profile = () => {
                 color={motor_status_color}
                 text={motor_status_text}
                 icon={motor_status_icon}
-                value={liveData.motor_status ? "On" : "Off"}
+                value={liveData.motor_status ? "ON" : "OFF"}
                 loading={loading}
               />
-              Turn ON/OFF the Motor
-              {/* <Switch checked={checked} onChange={switchHandler} /> */}
             </Col>
             <Col sm>
               <LiveDataCard
