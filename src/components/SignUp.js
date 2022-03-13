@@ -11,7 +11,6 @@ import { v4 as uuidv4 } from "uuid";
 
 //Bootstrap Imports
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import { useFormControlUnstyled } from "@mui/base";
 
 const SignUp = () => {
   const emailRef = useRef();

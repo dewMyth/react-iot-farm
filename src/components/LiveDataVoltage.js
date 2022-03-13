@@ -2,7 +2,7 @@ import React from "react";
 import "../css/cards.css";
 import classnames from "classnames";
 
-import { Spinner, ProgressBar } from "react-bootstrap";
+import { ProgressBar } from "react-bootstrap";
 
 const LiveDataVoltage = (props) => {
   return (

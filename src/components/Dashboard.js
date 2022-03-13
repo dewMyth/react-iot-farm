@@ -3,46 +3,18 @@ import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import Link from "react-router-dom/Link";
 
-import { db, fs } from "../firebase.config";
-
-//Bootstrap Imports
-import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { fs } from "../firebase.config";
 
 import DashboardNavbar from "./DashboardNavbar";
-import LiveDataCard from "./LiveDataCard";
-import VoltageLineChart from "./VoltageLineChart";
 
 import "../css/style.css";
 
 const Dashboard = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [deviceId, setDeviceId] = useState("");
-  const [liveData, setLiveData] = useState({});
-  const [records, setRecords] = useState([]);
 
   const { logout, currentUser } = useAuth();
   const history = useHistory();
-
-  //Humidity
-  const humidity_text = "Humidity";
-  const humidity_color = "border-left-primary";
-  const humidity_icon = "fas fa-tint";
-
-  //Solar Status
-  const solar_status_text = "Solar Status";
-  const solar_status_color = "border-left-warning";
-  const solar_status_icon = "fas fa-solar-panel";
-
-  //Moisture Status
-  const moisture_text = "Moisture";
-  const moisture_color = "border-left-success";
-  const moisture_icon = "fas fa-water";
-
-  //Voltage Status
-  const voltage_text = "Voltage";
-  const voltage_color = "border-left-danger";
-  const voltage_icon = "fas fa-bolt";
 
   const [devices, setDevices] = useState([]);
 
@@ -144,34 +116,36 @@ const Dashboard = () => {
       <div class="container-fluid">
         <h2>My Devices</h2>
         <div class="row flex-nowrap">
-          {devices.map((deviceId) => {
-            return (
-              <div
-                className="card card-block"
-                key={deviceId.id}
-                style={{ width: "18rem", margin: "0px 10px 0px 10px" }}
-              >
-                <img
-                  className="card-img-top"
-                  src="https://i.imgur.com/73cwR7F.jpg"
-                  alt="Card image cap"
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{deviceId.deviceId}</h5>
-                  <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <Link
-                    to={`/profile/${deviceId.deviceId}`}
-                    className="btn btn-primary"
+          {loading
+            ? "loading.."
+            : devices.map((deviceId) => {
+                return (
+                  <div
+                    className="card card-block"
+                    key={deviceId.id}
+                    style={{ width: "18rem", margin: "0px 10px 0px 10px" }}
                   >
-                    View More
-                  </Link>
-                </div>
-              </div>
-            );
-          })}
+                    <img
+                      className="card-img-top"
+                      src="https://i.imgur.com/73cwR7F.jpg"
+                      alt="Card image cap"
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">{deviceId.deviceId}</h5>
+                      <p className="card-text">
+                        Some quick example text to build on the card title and
+                        make up the bulk of the card's content.
+                      </p>
+                      <Link
+                        to={`/profile/${deviceId.deviceId}`}
+                        className="btn btn-primary"
+                      >
+                        View More
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
         </div>
       </div>
 

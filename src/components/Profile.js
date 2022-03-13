@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory, useParams } from "react-router-dom";
 
@@ -8,9 +8,7 @@ import LiveDataVoltage from "./LiveDataVoltage";
 
 import { Container, Row, Col, Spinner } from "react-bootstrap";
 
-import Switch from "@mui/material/Switch";
-
-import { db, fs } from "../firebase.config";
+import { db } from "../firebase.config";
 
 //Humidity
 const humidity_text = "Humidity";
@@ -33,9 +31,9 @@ const fertilizer_status_color = "border-left-success";
 const fertilizer_status_icon = "fas fa-hand-holding-seedling";
 
 //fertilizer Delay
-const fertilizer_delay_text = "Fertilizer Delay";
-const fertilizer_delay_color = "border-left-success";
-const fertilizer_delay_icon = "fas fa-water";
+// const fertilizer_delay_text = "Fertilizer Delay";
+// const fertilizer_delay_color = "border-left-success";
+// const fertilizer_delay_icon = "fas fa-water";
 
 //Light Status
 const light_text = "Light";
@@ -53,9 +51,9 @@ const motor_status_color = "border-left-success";
 const motor_status_icon = "fas fa-water";
 
 //Motor Delay
-const motor_delay_text = "Motor Delay";
-const motor_delay_color = "border-left-success";
-const motor_delay_icon = "fas fa-water";
+// const motor_delay_text = "Motor Delay";
+// const motor_delay_color = "border-left-success";
+// const motor_delay_icon = "fas fa-water";
 
 //Voltage Status
 const voltage_text = "Voltage";
@@ -65,24 +63,13 @@ const voltage_icon = "fas fa-bolt";
 const Profile = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [checked, setChecked] = useState(0);
   const [liveData, setLiveData] = useState({});
-  const [records, setRecords] = useState([]);
+  // const [records, setRecords] = useState([]);
 
   console.log(useParams());
 
   const { logout, currentUser } = useAuth();
   const history = useHistory();
-
-  const switchHandler = (event) => {
-    if (event.target.checked) {
-      setChecked(1);
-    } else {
-      setChecked(0);
-    }
-  };
-
-  console.log(checked);
 
   async function handleLogout() {
     setError("");
@@ -103,8 +90,8 @@ const Profile = () => {
           .ref("FirebaseIOT/Live_data/" + deviceId)
           .on("value", function (snapshot) {
             setLiveData(snapshot.val());
+            setLoading(true);
           });
-        setLoading(true);
       } catch (e) {
         console.log(e);
       }
@@ -133,8 +120,6 @@ const Profile = () => {
   useEffect(() => {
     changeMotorStatus();
   }, [changeMotorStatus]);
-
-  const label = { inputProps: { "aria-label": "Switch demo" } };
 
   return (
     <React.Fragment>
