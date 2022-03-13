@@ -123,12 +123,6 @@ const Profile = () => {
 
   return (
     <React.Fragment>
-      <DashboardNavbar
-        handleLogout={handleLogout}
-        error={error}
-        currentUser={currentUser}
-      />
-
       <Container>
         <Row className="mt-4">
           <Col>

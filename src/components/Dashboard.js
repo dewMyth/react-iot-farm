@@ -7,7 +7,7 @@ import { fs } from "../firebase.config";
 
 import DashboardNavbar from "./DashboardNavbar";
 
-import { Container, Spinner, Card } from "react-bootstrap";
+import { Container, Spinner, Button } from "react-bootstrap";
 
 import "../css/style.css";
 
@@ -111,47 +111,55 @@ const Dashboard = () => {
   return (
     <React.Fragment>
       <Container>
-        <Card style={{ width: "350px" }}>
-          <Card.Body>
-            <h2>My Devices</h2>
-            <div className="row">
-              {loading ? (
-                <>
-                  <Spinner animation="border" />
-                </>
-              ) : (
-                devices.map((deviceId) => {
-                  return (
-                    <div
-                      className="card card-block"
-                      key={deviceId.id}
-                      style={{ width: "18rem", margin: "0px 10px 0px 10px" }}
+        <h2 className="mt-3">My Devices</h2>
+        <hr />
+        <div className="row">
+          {loading ? (
+            <>
+              <Button variant="light" disabled>
+                <Spinner
+                  as="span"
+                  animation="grow"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+                Loading...
+              </Button>
+            </>
+          ) : (
+            devices.map((deviceId) => {
+              return (
+                <div
+                  className="card card-block"
+                  key={deviceId.id}
+                  style={{ width: "18rem", margin: "0px 10px 0px 10px" }}
+                >
+                  <img
+                    className="card-img-top"
+                    src="https://i.imgur.com/73cwR7F.jpg"
+                    alt="Card image cap"
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{deviceId.deviceId}</h5>
+                    <p className="card-text">
+                      Status - Alive <br />
+                      Plant - Carrot
+                      <br />
+                      Location - Galle
+                    </p>
+                    <Link
+                      to={`/profile/${deviceId.deviceId}`}
+                      className="btn btn-primary"
                     >
-                      <img
-                        className="card-img-top"
-                        src="https://i.imgur.com/73cwR7F.jpg"
-                        alt="Card image cap"
-                      />
-                      <div className="card-body">
-                        <h5 className="card-title">{deviceId.deviceId}</h5>
-                        <p className="card-text">
-                          Some quick example text to build on the card title and
-                          make up the bulk of the card's content.
-                        </p>
-                        <Link
-                          to={`/profile/${deviceId.deviceId}`}
-                          className="btn btn-primary"
-                        >
-                          View More
-                        </Link>
-                      </div>
-                    </div>
-                  );
-                })
-              )}
-            </div>
-          </Card.Body>
-        </Card>
+                      View Status
+                    </Link>
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
       </Container>
 
       {/* <Container>

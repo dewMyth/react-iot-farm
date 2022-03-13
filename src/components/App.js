@@ -23,12 +23,12 @@ const App = () => {
           <DashboardNavbar />
           <Switch>
             <Route path="/profile/:deviceId" exact component={Profile} />
+            <PrivateRoute exact path="/" component={Dashboard} />
             <Container
               className="d-flex align-items-center justify-content-center"
               style={{ minHeight: "90vh" }}
             >
               <div className="w-200" style={{ maxWidth: "400px" }}>
-                <PrivateRoute exact path="/" component={Dashboard} />
                 <Route path="/signup" exact component={SignUp} />
                 <Route path="/login" exact component={Login} />
 
