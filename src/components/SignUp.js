@@ -68,11 +68,15 @@ const SignUp = () => {
 
   const handleRemoveDevices = (id) => {
     const values = [...deviceIds];
-    values.splice(
-      values.findIndex((value) => value.id === id),
-      1
-    );
-    setDeviceIds(values);
+    if (values.length === 1) {
+      return;
+    } else {
+      values.splice(
+        values.findIndex((value) => value.id === id),
+        1
+      );
+      setDeviceIds(values);
+    }
   };
 
   return (
@@ -91,7 +95,7 @@ const SignUp = () => {
               {deviceIds.map((deviceId) => (
                 <div key={deviceId.id}>
                   <div className="row">
-                    <div className="col-md-8">
+                    <div className="col-md-7">
                       <Form.Control
                         name="deviceId"
                         placeholder="Enter Device ID"
@@ -102,18 +106,29 @@ const SignUp = () => {
                         }
                       ></Form.Control>
                     </div>
-                    <div className="col-md-4">
-                      <div className="row">
-                        <div className="col-md-2" onClick={handleAddDevices}>
+                    <div className="col-md-2">
+                      <div onClick={handleAddDevices}>
+                        <button
+                          className="btn-outline-success"
+                          style={{
+                            borderRadius: "10px",
+                          }}
+                        >
                           <AddIcon />
-                        </div>
-                        <div
-                          className="col-md-2"
-                          disabled={deviceIds.length === 1}
-                          onClick={() => handleRemoveDevices(deviceId.id)}
+                        </button>
+                      </div>
+                    </div>
+                    <div className="col-md-2">
+                      <div
+                        disabled={deviceIds.length === 1}
+                        onClick={() => handleRemoveDevices(deviceId.id)}
+                      >
+                        <button
+                          className="btn-outline-danger"
+                          style={{ borderRadius: "10px" }}
                         >
                           <RemoveIcon />
-                        </div>
+                        </button>
                       </div>
                     </div>
                   </div>

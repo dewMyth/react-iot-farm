@@ -13,20 +13,22 @@ import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
 import Profile from "./Profile";
+import DashboardNavbar from "./DashboardNavbar";
 
 const App = () => {
   return (
     <React.Fragment>
       <Router>
         <AuthProvider>
+          <DashboardNavbar />
           <Switch>
-            <PrivateRoute exact path="/" component={Dashboard} />
             <Route path="/profile/:deviceId" exact component={Profile} />
             <Container
               className="d-flex align-items-center justify-content-center"
-              style={{ minHeight: "100vh" }}
+              style={{ minHeight: "90vh" }}
             >
               <div className="w-200" style={{ maxWidth: "400px" }}>
+                <PrivateRoute exact path="/" component={Dashboard} />
                 <Route path="/signup" exact component={SignUp} />
                 <Route path="/login" exact component={Login} />
 
